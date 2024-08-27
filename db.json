@@ -1,0 +1,182 @@
+{
+  "user": [
+    {
+      "id": "1",
+      "name": "test",
+      "email": "te@gmail.com",
+      "password": 123
+    },
+    {
+      "id": "2",
+      "name": "Ahesanali",
+      "email": "ak@gmail.com",
+      "password": 1111
+    }
+  ],
+  "zone": [
+    {
+      "Z_Name": "mehsana",
+      "Z_Description": "sdfghjkl",
+      "status": "enabled",
+      "updated_by": "ak@gmail.com",
+      "created_by": "te@gmail.com",
+      "id": "c774"
+    },
+    {
+      "Z_Name": "janitor",
+      "Z_Description": "ddddd",
+      "status": "enabled",
+      "updated_by": "ak@gmail.com",
+      "created_by": "te@gmail.com",
+      "id": "58cf"
+    },
+    {
+      "Z_Name": "Edward Mcke",
+      "Z_Description": "Consequatur rerum v",
+      "status": "enabled",
+      "updated_by": "ak@gmail.com",
+      "created_by": "ak@gmail.com",
+      "id": "6f02"
+    },
+    {
+      "Z_Name": "Fiona Hensle",
+      "Z_Description": "Iusto eligendi excep",
+      "status": "enabled",
+      "updated_by": "ak@gmail.com",
+      "created_by": "ak@gmail.com",
+      "id": "eeb0"
+    },
+    {
+      "Z_Name": "Basil Compton",
+      "Z_Description": "Exercitation duis qu",
+      "status": "disabled",
+      "updated_by": "ak@gmail.com",
+      "created_by": "ak@gmail.com",
+      "id": "5ad0"
+    },
+    {
+      "id": "d286",
+      "Z_Name": "Grady Arnold",
+      "Z_Description": "Ea ullamco dolore do",
+      "status": "disabled",
+      "created_by": "ak@gmail.com",
+      "updated_by": ""
+    },
+    {
+      "id": "e274",
+      "Z_Name": "Daquan Ewing",
+      "Z_Description": "Possimus et ut et l",
+      "status": "enabled",
+      "created_by": "ak@gmail.com",
+      "updated_by": ""
+    },
+    {
+      "id": "b585",
+      "Z_Name": "Iris Vaughan",
+      "Z_Description": "Sit adipisicing pers",
+      "status": "enabled",
+      "created_by": "ak@gmail.com",
+      "updated_by": ""
+    },
+    {
+      "id": "f4a5",
+      "Z_Name": "Camille Landry",
+      "Z_Description": "Mollit id fugiat la",
+      "status": "enabled",
+      "created_by": "ak@gmail.com",
+      "updated_by": ""
+    }
+  ],
+  "node": [
+    {
+      "Name": "mar ghar h",
+      "Description": "Ullam voluptate reru",
+      "status": "enabled",
+      "updated_by": "te@gmail.com",
+      "created_by": "ak@gmail.com",
+      "zone": "sidhpur",
+      "id": "3fee"
+    },
+    {
+      "Name": "Clementine Allen",
+      "Description": "Ut nostrum laboriosa",
+      "status": "enabled",
+      "updated_by": "te@gmail.com",
+      "created_by": "te@gmail.com",
+      "zone": "Bevis Yates",
+      "id": "3b63"
+    },
+    {
+      "Name": "Morgan",
+      "Description": "Placeat sit cillum ",
+      "status": "disabled",
+      "updated_by": "te@gmail.com",
+      "created_by": "te@gmail.com",
+      "zone": "chhapi",
+      "id": "1517"
+    },
+    {
+      "Name": "Mallory Spearss",
+      "Description": "Quia autem harum ani",
+      "status": "disabled",
+      "updated_by": "te@gmail.com",
+      "created_by": "te@gmail.com",
+      "zone": "ahemdabad",
+      "id": "d896"
+    },
+    {
+      "Name": "Ayanna Mcleodd",
+      "Description": "Magni officia dolore",
+      "status": "disabled",
+      "updated_by": "te@gmail.com",
+      "created_by": "te@gmail.com",
+      "zone": "chhapi",
+      "id": "cc79"
+    },
+    {
+      "Name": "Aimee Sparks",
+      "Description": "Magnam totam qui inc",
+      "status": "disabled",
+      "updated_by": "ak@gmail.com",
+      "created_by": "te@gmail.com",
+      "zone": "Edward Mcke",
+      "id": "81e3"
+    },
+    {
+      "id": "2e8b",
+      "Name": "Melissa Stark",
+      "Description": "Illum quis magna cu",
+      "status": "enabled",
+      "created_by": "te@gmail.com",
+      "updated_by": "",
+      "zone": "Scarlett Juarez"
+    },
+    {
+      "id": "bc50",
+      "Name": "Freya Sampson",
+      "Description": "Consectetur quo non ",
+      "status": "enabled",
+      "created_by": "te@gmail.com",
+      "updated_by": "",
+      "zone": "janitor"
+    },
+    {
+      "id": "7c0a",
+      "Name": "Jelani Dean",
+      "Description": "Quis ipsum sed labor",
+      "status": "enabled",
+      "created_by": "ak@gmail.com",
+      "updated_by": "",
+      "zone": "janitor"
+    },
+    {
+      "id": "29ea",
+      "Name": "Clayton Mcknight",
+      "Description": "Quis tenetur est aut",
+      "status": "enabled",
+      "created_by": "ak@gmail.com",
+      "updated_by": "",
+      "zone": "Fiona Hensle"
+    }
+  ]
+}

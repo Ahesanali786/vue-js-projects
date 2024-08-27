@@ -1,0 +1,472 @@
+<template>
+<div class="container">
+    <h2>Add Node</h2>
+    <hr>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" v-model="form.Name">
+    </div>
+    <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" v-model="form.Description"></textarea>
+    </div>
+    <div class="form-group">
+
+        <label class="switch">
+            <input type="checkbox" v-model="isEnabled">
+            <span class="slider round"></span>
+            {{ isEnabled ? 'Enabled' : 'Disabled' }}
+        </label>
+        <br>
+        <!-- {{ zone.status }} -->
+        <div>
+            <select v-model="form.zone">
+
+                <option value="">Select Zone</option>
+                <option v-for="zone in zoneData" :key="zone.id" :value="zone.Z_Name" >
+                        {{ zone.Z_Name }} 
+                </option>
+            </select>
+        </div>
+        <br />
+        <br>
+        <button class="btn" @click="addnode()">Save</button>
+    </div>
+</div>
+</template>
+
+<script>
+import axios from 'axios'
+export default {
+    data() {
+        var user_info = JSON.parse(localStorage.getItem('user-info'))
+        return {
+            zoneData: '',
+            isEnabled: true, // default status is enabled
+            form: {
+                Name: '',
+                Description: '',
+                status: '',
+                created_by: user_info.email,
+                updated_by: '',
+                zone:''
+
+            },
+        }
+    },
+    methods: {
+        async addnode() {
+            // e.preventDefault()
+            
+            if (this.isEnabled) {
+                this.form.status = "Enabled";
+
+            } else {
+                this.form.status = "Disabled";
+            }
+            let result = await axios.post("http://localhost:3000/node", {
+
+                Name: this.form.Name,
+                Description: this.form.Description,
+                status: this.form.status,
+                created_by: this.form.created_by,
+                updated_by: this.form.updated_by,
+                zone: this.form.zone,
+
+            });
+            console.log(result);
+            
+            if (result.status == 201) {
+                // localStorage.setItem("rest-info", JSON.stringify(result.data))
+                this.$router.push({
+                    name: 'Node'
+                })
+            }
+        }
+
+    },
+    async mounted() {
+        let zones = await axios.get("http://localhost:3000/zone?status=enabled");
+        
+        this.zoneData = zones.data
+    }
+}
+
+</script>
+
+<style scoped>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.container h2 {
+    margin-top: 0;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.form-group input[type="checkbox"] {
+    width: auto;
+}
+
+.form-group .toggle-label {
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 25px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 15px;
+    width: 15px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: #2196F3;
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+label {
+    display: flex;
+    align-items: center;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+</style>
+
+
+
+swal({
+    title: "Are you sure?",
+    text: "You will not be able to recover this imaginary file!",
+    type: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#DD6B55",
+    confirmButtonText: "Yes, delete it!",
+    cancelButtonText: "No, cancel plx!",
+    closeOnConfirm: false,
+    closeOnCancel: false
+},
+function (isConfirm) {
+    if (isConfirm) {
+        swal("Deleted!", "Your imaginary file has been deleted.", "success");
+    } else {
+        swal("Cancelled", "Your imaginary file is safe :)", "error");
+    }
+});
+
+
+
+
+<template>
+    <logout />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <div class="container">
+        <div class="tabs">
+            <button class="tab">Zone</button>
+            <a href="/node"><button class="tab">Node</button></a>
+            <a href="/Add"><button class="add-zone">+ Add Zone</button></a>
+    
+        </div>
+        <hr />
+    </div>
+    <div class="container">
+        <input type="text" v-model="searchQuery" placeholder="Search..." class="search-bar" />
+        <button v-if="selectedItems.length > 0" @click="deleteSelected" class="delete-button"><i class="fa fa-trash"></i> Delete</button>
+        <button @click="printPdf" class="print-button"><i class="fa fa-print"></i> Print</button>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"><input type="checkbox" @change="selectAll($event)" /></th>
+                <th scope="col">id</th>
+                <th scope="col">Z_NAME</th>
+                <th scope="col">Z_desc</th>
+                <th scope="col">status</th>
+                <th scope="col">created_by</th>
+                <th scope="col">Updated_by</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="item in filteredZones" :key="item.id">
+                <td><input type="checkbox" v-model="selectedItems" :value="item.id" /></td>
+                <td>{{ item.id }}</td>
+                <td>{{ item.Z_Name }}</td>
+                <td>{{ item.Z_Description }}</td>
+                <td>{{ item.status }}</td>
+                <td>{{ item.created_by }}</td>
+                <td>{{ item.updated_by }}</td>
+                <td>
+                    <router-link :to="'/updatedby/' + item.id"><i id="hey1" class="bi bi-pencil-square"></i></router-link>
+                    <i id="hey" @click="deletresto(item.id)" class="bi bi-trash-fill"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </template>
+    
+    <script>
+    import axios from 'axios';
+    import jsPDF from 'jspdf';
+    import html2canvas from 'html2canvas';
+    import Logout from './logout.vue';
+    import swal from 'sweetalert'
+    
+    // export default {
+    //     components: {
+    //         Logout
+    //     },
+    //     data() {
+    //         return {
+    //             name: '',
+    //             zone: [],
+    //             searchQuery: '',
+    //             user: [],
+    //             selectedItems: [],
+    //         }
+    //     },
+    //     computed: {
+    //         filteredZones() {
+    //             return this.zone.filter(item => {
+    //                 return item.Z_Name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+    //                     item.status.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+    //                     item.created_by.toLowerCase().includes(this.searchQuery.toLowerCase());
+    //             });
+    //         }
+    //     },
+    //     methods: {
+    //         async deletresto(id) {
+    //             let result = await axios.delete("http://localhost:3000/zone/" + id);
+    //             if (result.status == 200) {
+    //                 this.load();
+    //             }
+    //         },
+    //         async deleteSelected() {
+    //             for (let id of this.selectedItems) {
+    //                 await this.deletresto(id);
+    //             }
+    //             this.selectedItems = [];
+    //         },
+    //         async load() {
+    //             let user = localStorage.getItem('user-info');
+    //             if (!user) {
+    //                 this.$router.push({
+    //                     name: 'Login'
+    //                 });
+    //             } else {
+    //                 // this.name = JSON.parse(user).name;
+    //                 let result = await axios.get("http://localhost:3000/zone");
+    //                 this.zone = result.data;
+    //             }
+    //         },
+    
+    //         selectAll(event) {
+    //             if (event.target.checked) {
+    //                 this.selectedItems = this.zone.map(item => item.id);
+    //             } else {
+    //                 this.selectedItems = [];
+    //             }
+    //         },
+    //         async printPdf() {
+    //             const doc = new jsPDF();
+    //             const table = document.querySelector('table');
+    //             const canvas = await html2canvas(table);
+    //             const imgData = canvas.toDataURL('image/png');
+    //             doc.addImage(imgData, 'PNG', 5, 35, 189, 200);
+    //             doc.save('table-data.pdf');
+    //         },
+    //     },
+    //     mounted() {
+    //         this.load();
+    //     },
+    // }
+    // </script>
+    
+    <!-- // <style>
+    // .container {
+    //     margin: 20px;
+    // }
+    
+    // .tabs {
+    //     display: flex;
+    //     gap: 10px;
+    // }
+    
+    // .tab,
+    // .add-zone,
+    // .delete-button {
+    //     background-color: #4CAF50;
+    //     /* Green */
+    //     border: none;
+    //     color: white;
+    //     padding: 10px 20px;
+    //     text-align: center;
+    //     text-decoration: none;
+    //     display: inline-block;
+    //     font-size: 16px;
+    //     margin: 4px 2px;
+    //     cursor: pointer;
+    //     border-radius: 4px;
+    //     transition: background-color 0.3s ease;
+    // }
+    
+    // .tab:hover,
+    // .add-zone:hover,
+    // .delete-button:hover {
+    //     background-color: #45a049;
+    // }
+    
+    // .search-bar {
+    //     width: 25%;
+    //     padding: 8px 14px;
+    //     margin: 4px 0;
+    //     box-sizing: border-box;
+    //     border: 3px solid #ccc;
+    //     border-radius: 4px;
+    // }
+    
+    // .table {
+    //     width: 100%;
+    //     border-collapse: collapse;
+    // }
+    
+    // .table th,
+    // .table td {
+    //     border: 1px solid #ddd;
+    //     padding: 8px;
+    // }
+    
+    // .table th {
+    //     background-color: #f2f2f2;
+    //     text-align: left;
+    // }
+    
+    // .delete-button {
+    //     margin-left: 100px;
+    //     cursor: pointer;
+    //     background-color: red;
+    //     border: none;
+    //     color: white;
+    //     padding: 10px 20px;
+    //     text-align: center;
+    //     text-decoration: none;
+    //     display: inline-block;
+    //     font-size: 16px;
+    //     margin: 4px 2px;
+    //     border-radius: 4px;
+    //     transition: background-color 0.3s ease;
+    
+    //     &:hover {
+    //         background-color: #ff3333;
+    //         color: white;
+    
+    //     }
+    // }
+    
+    // .print-button {
+    //     margin: 10px;
+    //     padding: 10px;
+    //     background-color: #4CAF50;
+    //     color: white;
+    //     border: none;
+    //     border-radius: 5px;
+    //     cursor: pointer;
+    // }
+    
+    // .print-button i {
+    //     margin-right: 5px;
+    // }
+    </style> -->
+    
